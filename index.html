@@ -1,0 +1,92 @@
+<html>
+  <head>
+    <title>Browser Engine playground</title>
+    <script src="index.ts" type="module"></script>
+    <style>
+      body {
+        font-family: sans-serif;
+      }
+
+      a {
+        cursor: pointer;
+        padding: 5px 5px 0 5px;
+      }
+
+      .canvas-wrapper {
+        overflow: auto;
+        border: 1px solid grey;
+        width: 100%;
+        height: 90%;
+
+      }
+
+      canvas {
+        width: 99%;
+      }
+
+      a.active {
+        color: white;
+        background-color: black;
+      }
+
+      .tab {
+        display:none;
+      }
+
+      .tabs {
+        margin-top: -1;
+        border-top: 1px solid black;
+        padding-top: 5px;
+      }
+    </style>
+    <script>
+      function display(event, id) {
+        document.querySelectorAll('.tab').forEach((node) => {
+          node.style.display = 'none';
+        });
+        document.querySelector('a.active')?.classList.remove('active');
+        document.querySelector(id).style.display = 'block';
+        event.target.classList.add('active');
+      }
+    </script>
+  </head>
+  <body>
+    <a onclick="((event) => {display(event, '#html');})(event)">HTML</a>
+    <a onclick="((event) => {display(event, '#engine');})(event)">Engine</a>
+    <div class="tabs">
+      <div class="tab" id="html">
+          <textarea cols="120" rows="20" id="source">
+<html>
+  <head>
+    <!-- nothing for now -->
+  </head>
+  <body>
+    <h1>Hello World</h1>
+    <p>
+      This is <a href="foo.html">just</a> <b>some</b> <i>text</i>. It is quite long and needs to be long enough to realistically wrap around our <a>small</a> screen.
+    </p>
+    <h2>Here goes</h2>
+    <p>
+      one two three four five six seven eight nine ten
+      one two three four five six seven eight nine twenty
+      one two three four five six seven eight nine thirty
+      one two three four five six seven eight nine fourty
+      one two three four five six seven eight nine fifty
+      one two three four five six seven eight nine sixty
+    </p>
+    <hr>
+    Somthing else under a line.
+  </body>
+</html>
+</textarea>
+<br>
+<button id="render">Render</button>
+      </div>
+      <div class="tab" id="engine" class="active" style="display: block;">
+          <div class="canvas-wrapper">
+            <canvas id="canvas"></canvas>
+          </div>
+      </div>
+    </div>
+  </body>
+</html>
